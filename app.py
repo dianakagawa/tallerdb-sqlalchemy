@@ -86,5 +86,27 @@ def todo():
         return redirect(url_for('todo'))
     return render_template('todo.html', todos=todos)
 
-if __name__ == '__main__':
+@app.route('/update/<int:todo_id>') # update todo
+@login_required
+def update_todo(todo_id):
+    todo_to_be_updated = Todo.query.filter_by(id=todo_id).first()
+    todo_to_be_updated.is_completed = not todo_to_be_updated.is_completed
+    db.session.commit()
+    return redirect(url_for('todo'))
+
+@app.route('/delete/<int:todo_id>') # delete todo
+@login_required
+def delete(todo_id):
+    todo = Todo.query.filter_by(id=todo_id).first()
+    db.session.delete(todo)
+    db.session.commit()
+    return redirect(url_for('todo'))
+
+@app.route('/logout') # logout
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+if __name__ == '__main__': # run app
     app.run(debug=True)
