@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrate</title>
+  </head>
+  <body>
+    <form method="post">
+      {{form.hidden_tag()}}<!-- This is the hidden tag that will be used to validate the form -->
+      {{form.name.label}} {{form.name()}}<br />
+      {{form.password.label}} {{form.password()}}<br />
+      {{form.email.label}} {{form.email()}}<br />
+      {{form.submit()}}
+    </form>
+  </body>
+</html>
